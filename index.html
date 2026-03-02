@@ -1,3 +1,11 @@
+<!-- Chosen Palette: Warm Neutral (fdfaf6), Coo-Pie Orange (ea580c), Muttville Blue (2563eb), Slate Dark (0f172a) -->
+<!-- Application Structure Plan: The SPA is designed as a vertical storytelling journey. It starts with a high-impact Hero section introducing the $30 Pi Day promotion, followed by a real-time 'Flavor Battle' leaderboard to drive preorders. The 'Impact Zone' (Mission + Pups) is now a unified dark-themed block that transitions from the organizational goal (Muttville) to the specific beneficiaries (Adoptable Dogs), using a condensed vertical flow to keep users engaged and moving toward the final CTA. -->
+<!-- Visualization & Content Choices: 
+1. Leaderboard: Interactive Tailwind-based progress bars for flavor voting. Interaction: Dynamic JS updates the 'Top Seed' in the hero based on these values.
+2. Pup Profiles: Interactive cards with 'Meet Me' links. Goal: Emotional connection. 
+3. Traveling Dog: A fixed-position 'Saving Lives' badge that follows the scroll. 
+Confirmation: NO custom SVG tags used (Lucide library used for standard icons); NO Mermaid JS used. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,17 +30,30 @@
         .bg-pie {
             background-color: #e67e22;
         }
-        /* Custom scroll behavior */
         html {
             scroll-behavior: smooth;
         }
-        /* Ensure the nav doesn't get too tall with the larger logo */
         nav {
-            min-height: 90px;
+            min-height: 100px;
+        }
+        @keyframes subtle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .traveling-dog {
+            animation: subtle-bounce 3s infinite ease-in-out;
         }
     </style>
 </head>
 <body class="text-slate-800">
+
+    <!-- Traveling Blue Dog Badge (Moves as you scroll) -->
+    <div class="fixed bottom-6 left-6 z-[60] traveling-dog pointer-events-none md:pointer-events-auto">
+        <div class="bg-blue-600 text-white p-4 md:p-5 rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-white">
+            <i data-lucide="dog" class="w-6 h-6 md:w-8 md:h-8 mb-1"></i>
+            <span class="text-[10px] md:text-xs font-bold uppercase tracking-tighter text-center">Saving<br>Lives</span>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-orange-100 py-2 px-6">
@@ -40,17 +61,16 @@
             
             <!-- Branding: Logo Large, Text Below -->
             <div class="flex flex-col items-center group py-1">
-                <div class="relative h-16 w-16 md:h-20 md:w-20 flex items-center justify-center bg-orange-500 rounded-2xl shadow-inner overflow-hidden mb-1">
+                <div class="relative h-20 w-20 md:h-24 md:w-24 flex items-center justify-center bg-orange-500 rounded-2xl shadow-inner overflow-hidden mb-1">
                     <img src="https://lh3.googleusercontent.com/d/1t_GXUwnG0o1h1j6w7eEATJCfCvkDntWX" 
                          alt="Coo-Pie Logo" 
                          class="h-full w-full object-cover"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <!-- This icon shows only if the image fails to load -->
-                    <div class="hidden absolute inset-0 bg-orange-600 items-center justify-center text-white">
+                    <div class="hidden absolute inset-0 bg-orange-600 items-center justify-center text-white text-center p-2">
                         <i data-lucide="pie-chart" class="w-10 h-10"></i>
                     </div>
                 </div>
-                <span class="heading-font text-xs tracking-widest text-orange-600 font-bold uppercase">Coo-Pie</span>
+                <span class="heading-font text-[10px] tracking-[0.2em] text-orange-600 font-bold uppercase">Coo-Pie</span>
             </div>
 
             <div class="flex items-center gap-4 md:gap-8">
@@ -67,35 +87,46 @@
     <section class="relative overflow-hidden bg-orange-50 pt-16 pb-24 px-6">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
-                <div class="inline-block bg-orange-200 text-orange-800 px-4 py-1 rounded-full text-sm font-bold mb-6">
-                    🥧 PI DAY FUNDRAISER (3.14)
+                <div class="inline-block bg-orange-200 text-orange-800 px-4 py-1 rounded-full text-sm font-bold mb-6 uppercase tracking-wider">
+                    🥧 Pi Day Fundraiser • 3.14
                 </div>
                 <h1 class="heading-font text-5xl md:text-6xl text-slate-900 leading-tight mb-6">
                     Pi Day for <br><span class="text-orange-500">the Pups!</span>
                 </h1>
                 <p class="text-xl text-slate-600 mb-8 leading-relaxed">
-                    Celebrate Pi Day with a slice of something good. Coo-Pie is baking for a cause—portion of every pie sold goes directly to <strong>Muttville Senior Dog Rescue</strong>.
+                    Celebrate Pi Day with a slice of something good! Coo-Pie is baking for a cause. <span class="text-orange-600 font-bold">Grab a homemade pie for $30</span>, and a portion of your purchase will go directly to Muttville Senior Dog Rescue to help senior dogs find their forever homes.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#voting" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-center text-lg shadow-lg shadow-orange-200 transition-all">
-                        Vote for Your Flavor
+                    <a href="#preorder" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-center text-lg shadow-lg shadow-orange-200 transition-all">
+                        Preorder Your Pie
                     </a>
-                    <a href="#mission" class="bg-white border-2 border-slate-200 hover:border-blue-400 text-slate-700 px-8 py-4 rounded-2xl font-bold text-center text-lg transition-all">
-                        The Mission
+                    <a href="#voting" class="bg-white border-2 border-slate-200 hover:border-orange-200 text-orange-600 px-8 py-4 rounded-2xl font-bold text-center text-lg transition-all">
+                        View Standings
                     </a>
                 </div>
             </div>
-            <div class="relative">
-                <div class="bg-white p-4 rounded-3xl shadow-2xl rotate-3 relative z-10">
-                    <img src="https://images.unsplash.com/photo-1572330132349-bc54c448d2ce?auto=format&fit=crop&q=80&w=800" alt="Delicious Apple Pie" class="rounded-2xl w-full h-80 object-cover">
-                    <div class="mt-4 flex justify-between items-center px-2">
-                        <span class="heading-font text-xl">Classic Apple</span>
-                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold">Top Seed</span>
+            
+            <!-- Shrunken, Intentional Top Seed Section -->
+            <div class="relative flex justify-center md:justify-end">
+                <div class="bg-white p-2 rounded-[2rem] shadow-2xl rotate-2 relative z-10 max-w-[280px] w-full overflow-hidden border border-orange-100/50">
+                    <!-- Tightened Image dimensions to eliminate white space -->
+                    <img src="https://images.unsplash.com/photo-1572330132349-bc54c448d2ce?auto=format&fit=crop&q=80&w=600" alt="Pie of the Day" class="rounded-[1.75rem] w-full h-52 object-cover shadow-inner">
+                    
+                    <!-- Minimized Dynamic Top Seed Badge -->
+                    <div id="hero-top-seed" class="mt-2 bg-orange-50 rounded-2xl p-2.5 border border-orange-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white shadow-sm shrink-0">
+                                <i data-lucide="crown" class="w-5 h-5"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <p class="text-[8px] font-bold text-orange-400 uppercase tracking-widest leading-none mb-1">Leader</p>
+                                <h3 id="top-seed-name" class="heading-font text-sm text-slate-800 leading-none truncate">Classic Apple</h3>
+                            </div>
+                        </div>
+                        <div class="bg-green-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded shadow-sm uppercase shrink-0 ml-1">
+                            Seed 1
+                        </div>
                     </div>
-                </div>
-                <div class="absolute -bottom-6 -left-6 bg-blue-500 text-white p-6 rounded-full shadow-xl z-20 flex flex-col items-center justify-center animate-bounce">
-                    <i data-lucide="dog" class="w-8 h-8 mb-1"></i>
-                    <span class="text-xs font-bold uppercase tracking-tighter">Saving Lives</span>
                 </div>
             </div>
         </div>
@@ -105,54 +136,58 @@
     <section id="voting" class="py-20 px-6 max-w-6xl mx-auto">
         <div class="text-center mb-16">
             <h2 class="heading-font text-4xl mb-2 text-slate-900">The Battle of the Flavors</h2>
-            <p class="text-slate-400 text-sm font-bold mb-4 uppercase tracking-widest">
+            <p id="update-timestamp" class="text-slate-400 text-sm font-bold mb-4 uppercase tracking-widest">
                 Last Updated: March 2nd, 9:00 AM
             </p>
             <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                We have 5 delicious flavors on the roster, but <strong>we are only baking the Top 3</strong>. Your preorder acts as your vote for which pies make it to the oven!
+                We have 5 delicious flavors on the roster, but <strong>we are only baking the Top 3</strong>. Every $30 preorder acts as your vote!
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center">
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center flavor-vote-card" data-flavor="Cherry">
                 <div class="text-4xl mb-3">🍒</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Cherry</h3>
                 <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
-                    <div class="bg-red-500 h-full rounded-full w-[85%]"></div>
+                    <div class="vote-progress bg-red-500 h-full rounded-full w-[85%]"></div>
                 </div>
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #1</span>
+                <span class="rank-label text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #1</span>
             </div>
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center">
+
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center flavor-vote-card" data-flavor="Classic Apple">
                 <div class="text-4xl mb-3">🍎</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Apple</h3>
                 <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
-                    <div class="bg-green-500 h-full rounded-full w-[78%]"></div>
+                    <div class="vote-progress bg-green-500 h-full rounded-full w-[78%]"></div>
                 </div>
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #2</span>
+                <span class="rank-label text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #2</span>
             </div>
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center">
+
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center flavor-vote-card" data-flavor="Peach">
                 <div class="text-4xl mb-3">🍑</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Peach</h3>
                 <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
-                    <div class="bg-orange-400 h-full rounded-full w-[62%]"></div>
+                    <div class="vote-progress bg-orange-400 h-full rounded-full w-[62%]"></div>
                 </div>
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #3</span>
+                <span class="rank-label text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #3</span>
             </div>
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70">
+
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70 flavor-vote-card" data-flavor="Strawberry">
                 <div class="text-4xl mb-3">🍓</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Strawberry</h3>
                 <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
-                    <div class="bg-pink-400 h-full rounded-full w-[35%]"></div>
+                    <div class="vote-progress bg-pink-400 h-full rounded-full w-[35%]"></div>
                 </div>
-                <span class="text-xs font-bold text-pink-500 uppercase tracking-widest italic">On the Edge</span>
+                <span class="rank-label text-xs font-bold text-pink-500 uppercase tracking-widest italic">On the Edge</span>
             </div>
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70">
+
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70 flavor-vote-card" data-flavor="Banana Cream">
                 <div class="text-4xl mb-3">🍌</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Banana</h3>
                 <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
-                    <div class="bg-yellow-400 h-full rounded-full w-[22%]"></div>
+                    <div class="vote-progress bg-yellow-400 h-full rounded-full w-[22%]"></div>
                 </div>
-                <span class="text-xs font-bold text-yellow-600 uppercase tracking-widest italic text-slate-700">Needs Love</span>
+                <span class="rank-label text-xs font-bold text-yellow-600 uppercase tracking-widest italic text-slate-700">Needs Love</span>
             </div>
         </div>
     </section>
@@ -160,70 +195,65 @@
     <!-- Combined Muttville Mission Area -->
     <div class="bg-slate-900 text-white">
         <!-- Mission Section -->
-        <section id="mission" class="py-24 px-6 overflow-hidden relative border-b border-white/5">
+        <section id="mission" class="pt-24 pb-8 px-6 overflow-hidden relative">
             <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=800" alt="Senior Dog" class="rounded-3xl shadow-2xl relative z-10 grayscale hover:grayscale-0 transition-all duration-700">
                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border-2 border-white/10 rounded-full animate-pulse"></div>
                 </div>
                 <div>
-                    <h2 class="heading-font text-4xl mb-6 text-white">Baking for the <br><span class="text-blue-400">Old Souls</span></h2>
+                    <h2 class="heading-font text-4xl mb-6 text-white leading-tight">Baking for the <br><span class="text-blue-400">Old Souls</span></h2>
                     <p class="text-lg text-slate-300 mb-8 leading-relaxed">
                         Muttville Senior Dog Rescue is a San Francisco-based nonprofit that gives senior dogs a second chance. These "wise" dogs often get overlooked in shelters, but they have so much love to give.
                     </p>
-                    <div class="flex flex-col gap-4 mb-8">
-                        <a href="https://muttville.org/about_us" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-bold text-center inline-flex items-center justify-center gap-2 transition-all">
+                    <div class="flex flex-col gap-4">
+                        <a href="https://muttville.org/about_us" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-bold text-center inline-flex items-center justify-center gap-2 transition-all shadow-lg">
                             Learn More About Muttville <i data-lucide="external-link" class="w-4 h-4"></i>
                         </a>
-                    </div>
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 italic text-slate-300">
-                        "Eat pie. Save old dogs. It's a win-win."
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Muttville Gallery Section -->
-        <section id="pups" class="py-24 px-6">
+        <section id="pups" class="pt-4 pb-24 px-6">
             <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 border-t border-white/5 pt-12">
                     <h2 class="heading-font text-4xl mb-4 text-white">The Seniors You're Helping</h2>
-                    <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">Every slice supports these real dogs currently looking for homes. Click below to view their full profiles on Muttville.</p>
+                    <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">Every slice supports these real dogs currently looking for homes. Click below to view their full profiles.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Dog 1: Mario -->
-                    <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all group">
+                    <!-- Mario -->
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all group border-b-4 border-b-blue-500/30">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-bold text-2xl text-white">Mario</h3>
                             <i data-lucide="heart" class="text-blue-400 group-hover:fill-blue-400 transition-all"></i>
                         </div>
-                        <p class="text-slate-400 mb-8 leading-relaxed italic">"A sweet soul ready for his forever lap. Mario is a calm companion who knows how to make any room brighter."</p>
-                        <a href="https://muttville.org/mutt/mario-13839" target="_blank" class="block w-full border-2 border-blue-500/50 hover:border-blue-500 text-blue-400 text-center py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2">
+                        <p class="text-slate-400 mb-8 leading-relaxed italic text-sm">"A sweet soul ready for his forever lap. Mario is a calm companion who knows how to make any room brighter."</p>
+                        <a href="https://muttville.org/mutt/mario-13839" target="_blank" class="block w-full border-2 border-blue-500/50 hover:border-blue-500 text-blue-400 text-center py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-widest">
                             Meet Mario <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                         </a>
                     </div>
-
-                    <!-- Dog 2: Dumpling -->
-                    <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all group">
+                    <!-- Dumpling -->
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all group border-b-4 border-b-blue-500/30">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-bold text-2xl text-white">Dumpling</h3>
                             <i data-lucide="heart" class="text-blue-400 group-hover:fill-blue-400 transition-all"></i>
                         </div>
-                        <p class="text-slate-400 mb-8 leading-relaxed italic">"Round, lovable, and full of happiness. Dumpling is a professional napper who is ready to retire in a comfy home."</p>
-                        <a href="https://muttville.org/mutt/dumpling-13824" target="_blank" class="block w-full border-2 border-blue-500/50 hover:border-blue-500 text-blue-400 text-center py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2">
+                        <p class="text-slate-400 mb-8 leading-relaxed italic text-sm">"Round, lovable, and full of happiness. Dumpling is a professional napper who is ready to retire in a comfy home."</p>
+                        <a href="https://muttville.org/mutt/dumpling-13824" target="_blank" class="block w-full border-2 border-blue-500/50 hover:border-blue-500 text-blue-400 text-center py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-widest">
                             Meet Dumpling <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                         </a>
                     </div>
-
-                    <!-- Dog 3: Christopher Guest -->
-                    <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all group">
+                    <!-- Christopher Guest -->
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all group border-b-4 border-b-blue-500/30">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="font-bold text-2xl text-white">Christopher Guest</h3>
                             <i data-lucide="heart" class="text-blue-400 group-hover:fill-blue-400 transition-all"></i>
                         </div>
-                        <p class="text-slate-400 mb-8 leading-relaxed italic">"A distinguished gentleman who loves gentle pets. He carries himself with dignity and is looking for a quiet home."</p>
-                        <a href="https://muttville.org/mutt/christopher-guest-13785" target="_blank" class="block w-full border-2 border-blue-500/50 hover:border-blue-500 text-blue-400 text-center py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2">
+                        <p class="text-slate-400 mb-8 leading-relaxed italic text-sm">"A distinguished gentleman who loves gentle pets. He carries himself with dignity and is looking for a quiet home."</p>
+                        <a href="https://muttville.org/mutt/christopher-guest-13785" target="_blank" class="block w-full border-2 border-blue-500/50 hover:border-blue-500 text-blue-400 text-center py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-widest">
                             Meet Christopher <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                         </a>
                     </div>
@@ -233,32 +263,32 @@
     </div>
 
     <!-- Final CTA -->
-    <section id="preorder" class="py-32 px-6">
-        <div class="max-w-3xl mx-auto bg-gradient-to-br from-orange-500 to-orange-600 rounded-[3rem] p-12 text-center text-white shadow-2xl relative">
+    <section id="preorder" class="py-32 px-6 bg-orange-50 text-center">
+        <div class="max-w-3xl mx-auto bg-gradient-to-br from-orange-500 to-orange-600 rounded-[3rem] p-12 text-white shadow-2xl relative">
             <div class="absolute -top-10 left-1/2 -translate-x-1/2 text-6xl">🥧</div>
-            <h2 class="heading-font text-4xl mb-4">Ready to secure your pie?</h2>
+            <h2 class="heading-font text-4xl mb-4 text-white">Ready to secure your pie?</h2>
             <p class="text-xl mb-8 opacity-90">Visit our Google Form to cast your vote and preorder.</p>
             <a href="https://forms.gle/7vXnNAAUyTB2E6PH8" target="_blank" class="inline-block bg-white text-orange-600 hover:bg-orange-50 px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl">
                 ORDER & VOTE HERE
             </a>
-            <p class="mt-8 text-sm opacity-70 italic font-medium">Preorders act as votes. Top 3 flavors will be baked!</p>
+            <p class="mt-8 text-sm opacity-70 italic font-medium">Preorders act as votes. Top 3 baked!</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-100 py-12 px-6 border-t border-slate-200">
+    <footer class="bg-white py-12 px-6 border-t border-slate-200">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
             <div class="flex flex-col items-center gap-1">
-                <div class="h-12 w-12 bg-orange-500 rounded-xl flex items-center justify-center overflow-hidden shadow-sm">
+                <div class="h-14 w-14 bg-orange-500 rounded-xl flex items-center justify-center overflow-hidden shadow-sm">
                     <img src="https://lh3.googleusercontent.com/d/1t_GXUwnG0o1h1j6w7eEATJCfCvkDntWX" alt="Coo-Pie Logo" class="h-full w-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <i data-lucide="pie-chart" class="hidden text-white w-6 h-6"></i>
+                    <i data-lucide="pie-chart" class="hidden text-white w-7 h-7"></i>
                 </div>
                 <span class="heading-font text-[10px] text-orange-600 font-bold uppercase tracking-widest">Coo-Pie</span>
             </div>
             
-            <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
+            <div class="flex flex-col md:flex-row gap-6 md:gap-16 items-center">
                 <div class="flex flex-col gap-2 items-center md:items-start text-sm">
-                    <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Contact Us</span>
+                    <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px] mb-1">Contact Us</span>
                     <a href="mailto:coopdodds@gmail.com" class="text-slate-700 hover:text-orange-500 transition-colors font-bold flex items-center gap-2">
                         <i data-lucide="mail" class="w-4 h-4"></i> coopdodds@gmail.com
                     </a>
@@ -267,7 +297,7 @@
                     </a>
                 </div>
                 <div class="flex flex-col gap-2 items-center md:items-start text-sm">
-                    <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Follow & Support</span>
+                    <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px] mb-1">Follow & Support</span>
                     <div class="flex gap-6">
                         <a href="#" class="text-slate-700 hover:text-orange-500 transition-colors font-bold">Instagram</a>
                         <a href="https://muttville.org" target="_blank" class="text-slate-700 hover:text-blue-500 transition-colors font-bold">Muttville.org</a>
@@ -281,6 +311,29 @@
 
     <script>
         lucide.createIcons();
+
+        // 🥧 SMART TOP SEED LOGIC 🥧
+        function updateTopSeed() {
+            const flavorCards = document.querySelectorAll('.flavor-vote-card');
+            let maxPercent = -1;
+            let leaderName = "Classic Apple";
+
+            flavorCards.forEach(card => {
+                const bar = card.querySelector('.vote-progress');
+                const match = bar.className.match(/w-\[(\d+)%\]/);
+                if (match) {
+                    const percent = parseInt(match[1]);
+                    if (percent > maxPercent) {
+                        maxPercent = percent;
+                        leaderName = card.getAttribute('data-flavor');
+                    }
+                }
+            });
+
+            document.getElementById('top-seed-name').innerText = leaderName;
+        }
+
+        window.onload = updateTopSeed;
         
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
