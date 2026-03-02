@@ -22,6 +22,12 @@
         .bg-pie {
             background-color: #e67e22;
         }
+        .dog-gallery-img {
+            transition: transform 0.5s ease;
+        }
+        .dog-gallery-card:hover .dog-gallery-img {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body class="text-slate-800">
@@ -33,7 +39,7 @@
                 <div class="w-10 h-10 bg-pie rounded-full flex items-center justify-center text-white">
                     <i data-lucide="pie-chart"></i>
                 </div>
-                <span class="heading-font text-2xl tracking-wider text-orange-600">Coo-Pie</span>
+                <span class="heading-font text-2xl tracking-wider text-orange-600 font-bold">Coo-Pie</span>
             </div>
             <a href="#preorder" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-bold transition-colors">
                 Order Now
@@ -82,13 +88,17 @@
     <!-- The Top 3 Rule -->
     <section id="voting" class="py-20 px-6 max-w-6xl mx-auto">
         <div class="text-center mb-16">
-            <h2 class="heading-font text-4xl mb-4">The Battle of the Flavors</h2>
+            <h2 class="heading-font text-4xl mb-2">The Battle of the Flavors</h2>
+            <p class="text-slate-400 text-sm font-bold mb-4 uppercase tracking-widest">
+                Last Updated: March 2nd, 9:00 AM
+            </p>
             <p class="text-lg text-slate-600 max-w-2xl mx-auto">
                 We have 5 delicious flavors on the roster, but <strong>we are only baking the Top 3</strong>. Your preorder acts as your vote for which pies make it to the oven!
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+            <!-- Flavor Card: Cherry -->
             <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center">
                 <div class="text-4xl mb-3">🍒</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Cherry</h3>
@@ -97,6 +107,8 @@
                 </div>
                 <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #1</span>
             </div>
+
+            <!-- Flavor Card: Apple -->
             <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center">
                 <div class="text-4xl mb-3">🍎</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Apple</h3>
@@ -105,6 +117,8 @@
                 </div>
                 <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #2</span>
             </div>
+
+            <!-- Flavor Card: Peach -->
             <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center">
                 <div class="text-4xl mb-3">🍑</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Peach</h3>
@@ -113,6 +127,8 @@
                 </div>
                 <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #3</span>
             </div>
+
+            <!-- Flavor Card: Strawberry -->
             <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70">
                 <div class="text-4xl mb-3">🍓</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Strawberry</h3>
@@ -121,21 +137,61 @@
                 </div>
                 <span class="text-xs font-bold text-pink-500 uppercase tracking-widest italic">On the Edge</span>
             </div>
+
+            <!-- Flavor Card: Banana -->
             <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70">
                 <div class="text-4xl mb-3">🍌</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Banana</h3>
                 <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
                     <div class="bg-yellow-400 h-full rounded-full w-[22%]"></div>
                 </div>
-                <span class="text-xs font-bold text-yellow-600 uppercase tracking-widest italic">Needs Love</span>
+                <span class="text-xs font-bold text-yellow-600 uppercase tracking-widest italic text-slate-700">Needs Love</span>
             </div>
         </div>
+    </section>
 
-        <div class="mt-12 bg-yellow-50 border border-yellow-100 p-6 rounded-2xl flex items-start gap-4">
-            <i data-lucide="info" class="text-yellow-600 flex-shrink-0"></i>
-            <p class="text-sm text-yellow-800">
-                <strong>What happens if your flavor doesn't make the Top 3?</strong> If your pick doesn't win, we will contact you on March 11th. You can either swap to a winning flavor or get a full refund.
-            </p>
+    <!-- Muttville Gallery Section -->
+    <section id="pups" class="py-20 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-4xl mb-4 text-slate-900">The Seniors You're Helping</h2>
+                <p class="text-lg text-slate-600">Your pie preorder supports sweet "mutt-i-grees" like these at Muttville.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Dog 1 -->
+                <div class="dog-gallery-card group overflow-hidden rounded-3xl shadow-lg bg-orange-50">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800" alt="Senior Dog" class="dog-gallery-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Bernie</h3>
+                        <p class="text-sm text-slate-500 italic">"The Distinguished Gentleman"</p>
+                    </div>
+                </div>
+
+                <!-- Dog 2 -->
+                <div class="dog-gallery-card group overflow-hidden rounded-3xl shadow-lg bg-orange-50">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1591768575198-88dac53fbd0a?auto=format&fit=crop&q=80&w=800" alt="Senior Dog" class="dog-gallery-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Mabel</h3>
+                        <p class="text-sm text-slate-500 italic">"Professional Napper"</p>
+                    </div>
+                </div>
+
+                <!-- Dog 3 -->
+                <div class="dog-gallery-card group overflow-hidden rounded-3xl shadow-lg bg-orange-50">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80&w=800" alt="Senior Dog" class="dog-gallery-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Gus</h3>
+                        <p class="text-sm text-slate-500 italic">"Always Smiling"</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -147,11 +203,16 @@
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border-2 border-white/10 rounded-full animate-pulse"></div>
             </div>
             <div>
-                <h2 class="heading-font text-4xl mb-6">Baking for the <br><span class="text-blue-400">Old Souls</span></h2>
-                <p class="text-lg text-slate-300 mb-6 leading-relaxed">
+                <h2 class="heading-font text-4xl mb-6 text-white text-white">Baking for the <br><span class="text-blue-400">Old Souls</span></h2>
+                <p class="text-lg text-slate-300 mb-8 leading-relaxed">
                     Muttville Senior Dog Rescue is a San Francisco-based nonprofit that gives senior dogs a second chance. These "wise" dogs often get overlooked in shelters, but they have so much love to give.
                 </p>
-                <div class="bg-white/5 p-6 rounded-2xl border border-white/10 italic">
+                <div class="flex flex-col gap-4 mb-8">
+                    <a href="https://muttville.org/about_us" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-bold text-center inline-flex items-center justify-center gap-2 transition-all">
+                        Learn More About Muttville <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10 italic text-slate-300">
                     "Eat pie. Save old dogs. It's a win-win."
                 </div>
             </div>
@@ -169,6 +230,24 @@
             </a>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-100 py-12 px-6 border-t border-slate-200">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white">
+                    <i data-lucide="pie-chart" class="w-4 h-4"></i>
+                </div>
+                <span class="heading-font text-xl text-orange-600 font-bold font-bold">Coo-Pie</span>
+            </div>
+            <div class="flex gap-8 text-slate-500 font-semibold">
+                <a href="#" class="hover:text-orange-500">Instagram</a>
+                <a href="#" class="hover:text-orange-500">Contact Us</a>
+                <a href="https://muttville.org" target="_blank" class="hover:text-blue-500">Muttville.org</a>
+            </div>
+            <p class="text-slate-400 text-sm">© 2025 Coo-Pie. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script>
         lucide.createIcons();
