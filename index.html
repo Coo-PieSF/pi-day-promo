@@ -1,9 +1,10 @@
 <!-- Chosen Palette: Warm Neutral (fdfaf6), Coo-Pie Orange (ea580c), Muttville Blue (2563eb), Slate Dark (0f172a) -->
-<!-- Application Structure Plan: The SPA is designed as a vertical storytelling journey. It starts with a high-impact Hero section introducing the $30 Pi Day promotion, followed by a real-time 'Flavor Battle' leaderboard to drive preorders. The 'Impact Zone' (Mission + Pups) is now a unified dark-themed block that transitions from the organizational goal (Muttville) to the specific beneficiaries (Adoptable Dogs), using a condensed vertical flow to keep users engaged and moving toward the final CTA. -->
+<!-- Application Structure Plan: The SPA is designed as a vertical storytelling journey centered on impact. The Hero section now leads with high-visibility typography emphasizing the $30 donation and $15 glass dish upgrade. The 'Impact Zone' (Mission + Pups) is a unified dark-themed block that transitions from the rescue mission to the specific dogs waiting for homes. -->
 <!-- Visualization & Content Choices: 
-1. Leaderboard: Interactive Tailwind-based progress bars for flavor voting. Interaction: Dynamic JS updates the 'Top Seed' in the hero based on these values.
-2. Pup Profiles: Interactive cards with 'Meet Me' links. Goal: Emotional connection. 
-3. Traveling Dog: A fixed-position 'Saving Lives' badge that follows the scroll. 
+1. Typography-Led Hero: Centered text layout to drive clarity and conversions without distraction.
+2. Leaderboard: Interactive Tailwind-based progress bars for flavor voting.
+3. Pup Profiles: Interactive cards with 'Meet Me' links. Goal: Emotional connection. 
+4. Traveling Dog: A fixed-position 'Saving Lives' badge that follows the scroll. 
 Confirmation: NO SVG graphics used (Lucide icons used via JS library). NO Mermaid JS used. -->
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 <!DOCTYPE html>
@@ -74,8 +75,8 @@ Confirmation: NO SVG graphics used (Lucide icons used via JS library). NO Mermai
             </div>
 
             <div class="flex items-center gap-4 md:gap-8">
-                <a href="#voting" class="hidden md:block font-bold text-slate-600 hover:text-orange-500 transition-colors text-sm">The Battle</a>
-                <a href="#mission" class="hidden md:block font-bold text-slate-600 hover:text-orange-500 transition-colors text-sm">Our Mission</a>
+                <a href="#voting" class="hidden md:block font-bold text-slate-600 hover:text-orange-500 transition-colors text-sm uppercase tracking-widest">The Battle</a>
+                <a href="#mission" class="hidden md:block font-bold text-slate-600 hover:text-orange-500 transition-colors text-sm uppercase tracking-widest">Our Mission</a>
                 <a href="#preorder" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-full font-bold transition-all shadow-md hover:shadow-lg text-sm md:text-base">
                     Order Now
                 </a>
@@ -83,53 +84,28 @@ Confirmation: NO SVG graphics used (Lucide icons used via JS library). NO Mermai
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-orange-50 pt-16 pb-24 px-6">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <div class="inline-block bg-orange-200 text-orange-800 px-4 py-1 rounded-full text-sm font-bold mb-6 uppercase tracking-wider">
-                    🥧 Pi Day Fundraiser • 3.14
-                </div>
-                <h1 class="heading-font text-5xl md:text-6xl text-slate-900 leading-tight mb-6">
-                    Pi Day for <br><span class="text-orange-500">the Pups!</span>
-                </h1>
-                <p class="text-xl text-slate-600 mb-8 leading-relaxed">
-                    Celebrate Pi Day with a slice of something good! Coo-Pie is baking for a cause. <span class="text-orange-600 font-bold">Grab a homemade pie for $30</span>, and a portion of your purchase will go directly to Muttville Senior Dog Rescue to help senior dogs find their forever homes.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#preorder" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-center text-lg shadow-lg shadow-orange-200 transition-all">
-                        Preorder Your Pie
-                    </a>
-                    <a href="#voting" class="bg-white border-2 border-slate-200 hover:border-orange-200 text-orange-600 px-8 py-4 rounded-2xl font-bold text-center text-lg transition-all">
-                        View Standings
-                    </a>
-                </div>
+    <!-- Hero Section: Updated with centered typography -->
+    <section class="relative overflow-hidden bg-orange-50 pt-20 pb-28 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-block bg-orange-200 text-orange-800 px-6 py-1.5 rounded-full text-sm font-bold mb-8 uppercase tracking-widest shadow-sm">
+                🥧 Pi Day Fundraiser • 3.14
             </div>
-            
-            <!-- Hero Card: Now clearly displaying a Pie Image -->
-            <div class="relative flex justify-center md:justify-end">
-                <div class="bg-white p-2 rounded-[2.5rem] shadow-2xl rotate-2 relative z-10 max-w-[320px] w-full overflow-hidden border border-orange-100/50">
-                    <!-- High-quality Pie Image to fill the space -->
-                    <img src="https://images.unsplash.com/photo-1572330132349-bc54c448d2ce?auto=format&fit=crop&q=80&w=800" 
-                         alt="Pie of the Day" 
-                         class="rounded-[1.75rem] w-full h-60 object-cover shadow-inner">
-                    
-                    <!-- Dynamic Top Seed Badge: Smaller, Intentional -->
-                    <div id="hero-top-seed" class="mt-2 bg-orange-50 rounded-2xl p-2.5 border border-orange-100 flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white shadow-sm shrink-0">
-                                <i data-lucide="crown" class="w-6 h-6"></i>
-                            </div>
-                            <div class="overflow-hidden">
-                                <p class="text-[8px] font-bold text-orange-400 uppercase tracking-widest leading-none mb-1">Current Leader</p>
-                                <h3 id="top-seed-name" class="heading-font text-base text-slate-800 leading-none truncate">Classic Apple</h3>
-                            </div>
-                        </div>
-                        <div class="bg-emerald-500 text-white text-[8px] font-black px-2 py-1 rounded shadow-sm uppercase shrink-0 ml-1">
-                            Seed 1
-                        </div>
-                    </div>
-                </div>
+            <h1 class="heading-font text-6xl md:text-8xl text-slate-900 leading-tight mb-8">
+                Pi Day for <br><span class="text-orange-500">the Pups!</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-600 mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
+                Celebrate Pi Day with a slice of something good! Coo-Pie is baking for a cause. <span class="text-orange-600 font-bold underline decoration-orange-200 underline-offset-4">Grab a homemade pie for $30</span>, and a portion of your purchase goes directly to Muttville Senior Dog Rescue. 
+                <br><br>
+                <span class="text-slate-800 font-semibold block">Want to keep the goodness going?</span> 
+                For just <span class="text-orange-600 font-bold">$15 more</span>, we’ll bake your pie in a premium glass dish that you can keep, reuse, and refill for years to come.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                <a href="#preorder" class="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white px-12 py-5 rounded-2xl font-bold text-xl shadow-xl shadow-orange-200/50 transition-all hover:scale-105 active:scale-95">
+                    Preorder Your Pie
+                </a>
+                <a href="#voting" class="w-full sm:w-auto bg-white border-2 border-slate-200 hover:border-orange-200 text-orange-600 px-12 py-5 rounded-2xl font-bold text-xl transition-all">
+                    View Standings
+                </a>
             </div>
         </div>
     </section>
@@ -201,7 +177,7 @@ Confirmation: NO SVG graphics used (Lucide icons used via JS library). NO Mermai
 
     <!-- Combined Muttville Mission Area -->
     <div class="bg-slate-900 text-white">
-        <!-- Mission Section: Tightly controlled padding -->
+        <!-- Mission Section -->
         <section id="mission" class="pt-24 pb-0 px-6 overflow-hidden relative">
             <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
                 <div class="relative">
@@ -222,7 +198,7 @@ Confirmation: NO SVG graphics used (Lucide icons used via JS library). NO Mermai
             </div>
         </section>
 
-        <!-- Muttville Gallery Section: Gap Removed -->
+        <!-- Muttville Gallery Section -->
         <section id="pups" class="pt-12 pb-24 px-6">
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-12 border-t border-white/10 pt-12">
@@ -318,35 +294,6 @@ Confirmation: NO SVG graphics used (Lucide icons used via JS library). NO Mermai
 
     <script>
         lucide.createIcons();
-
-        // 🥧 SMART TOP SEED LOGIC 🥧
-        function updateTopSeed() {
-            const flavorCards = document.querySelectorAll('.flavor-vote-card');
-            let maxPercent = -1;
-            let leaderName = "Classic Apple";
-            let leaderEmoji = "🍎";
-
-            flavorCards.forEach(card => {
-                const bar = card.querySelector('.vote-progress');
-                const classString = bar.className;
-                const match = classString.match(/w-\[(\d+)%\]/);
-                
-                if (match) {
-                    const percent = parseInt(match[1]);
-                    if (percent > maxPercent) {
-                        maxPercent = percent;
-                        leaderName = card.getAttribute('data-flavor');
-                        leaderEmoji = card.getAttribute('data-emoji') || "🥧";
-                    }
-                }
-            });
-
-            // Update the Top Seed card in the Hero Section
-            const nameEl = document.getElementById('top-seed-name');
-            nameEl.innerText = `${leaderEmoji} ${leaderName}`;
-        }
-
-        window.onload = updateTopSeed;
         
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
