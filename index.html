@@ -4,7 +4,7 @@
 1. Leaderboard: Interactive Tailwind-based progress bars for flavor voting. Interaction: Dynamic JS updates the 'Top Seed' in the hero based on these values.
 2. Pup Profiles: Interactive cards with 'Meet Me' links. Goal: Emotional connection. 
 3. Traveling Dog: A fixed-position 'Saving Lives' badge that follows the scroll. 
-Confirmation: NO custom SVG tags used (Lucide library used for standard icons); NO Mermaid JS used. -->
+Confirmation: NO SVG graphics used (Lucide icons used via JS library). NO Mermaid JS used. -->
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +61,7 @@ Confirmation: NO custom SVG tags used (Lucide library used for standard icons); 
             
             <!-- Branding: Logo Large, Text Below -->
             <div class="flex flex-col items-center group py-1">
-                <div class="relative h-20 w-20 md:h-24 md:w-24 flex items-center justify-center bg-orange-500 rounded-2xl shadow-inner overflow-hidden mb-1">
+                <div class="relative h-20 w-20 md:h-24 md:w-24 flex items-center justify-center bg-orange-500 rounded-2xl shadow-inner overflow-hidden mb-1 border-2 border-orange-100">
                     <img src="https://lh3.googleusercontent.com/d/1t_GXUwnG0o1h1j6w7eEATJCfCvkDntWX" 
                          alt="Coo-Pie Logo" 
                          class="h-full w-full object-cover"
@@ -106,24 +106,26 @@ Confirmation: NO custom SVG tags used (Lucide library used for standard icons); 
                 </div>
             </div>
             
-            <!-- Shrunken, Intentional Top Seed Section -->
+            <!-- Hero Card: Now clearly displaying a Pie Image -->
             <div class="relative flex justify-center md:justify-end">
-                <div class="bg-white p-2 rounded-[2rem] shadow-2xl rotate-2 relative z-10 max-w-[280px] w-full overflow-hidden border border-orange-100/50">
-                    <!-- Tightened Image dimensions to eliminate white space -->
-                    <img src="https://images.unsplash.com/photo-1572330132349-bc54c448d2ce?auto=format&fit=crop&q=80&w=600" alt="Pie of the Day" class="rounded-[1.75rem] w-full h-52 object-cover shadow-inner">
+                <div class="bg-white p-2 rounded-[2.5rem] shadow-2xl rotate-2 relative z-10 max-w-[320px] w-full overflow-hidden border border-orange-100/50">
+                    <!-- High-quality Pie Image to fill the space -->
+                    <img src="https://images.unsplash.com/photo-1572330132349-bc54c448d2ce?auto=format&fit=crop&q=80&w=800" 
+                         alt="Pie of the Day" 
+                         class="rounded-[1.75rem] w-full h-60 object-cover shadow-inner">
                     
-                    <!-- Minimized Dynamic Top Seed Badge -->
+                    <!-- Dynamic Top Seed Badge: Smaller, Intentional -->
                     <div id="hero-top-seed" class="mt-2 bg-orange-50 rounded-2xl p-2.5 border border-orange-100 flex items-center justify-between">
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white shadow-sm shrink-0">
-                                <i data-lucide="crown" class="w-5 h-5"></i>
+                            <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white shadow-sm shrink-0">
+                                <i data-lucide="crown" class="w-6 h-6"></i>
                             </div>
                             <div class="overflow-hidden">
-                                <p class="text-[8px] font-bold text-orange-400 uppercase tracking-widest leading-none mb-1">Leader</p>
-                                <h3 id="top-seed-name" class="heading-font text-sm text-slate-800 leading-none truncate">Classic Apple</h3>
+                                <p class="text-[8px] font-bold text-orange-400 uppercase tracking-widest leading-none mb-1">Current Leader</p>
+                                <h3 id="top-seed-name" class="heading-font text-base text-slate-800 leading-none truncate">Classic Apple</h3>
                             </div>
                         </div>
-                        <div class="bg-green-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded shadow-sm uppercase shrink-0 ml-1">
+                        <div class="bg-emerald-500 text-white text-[8px] font-black px-2 py-1 rounded shadow-sm uppercase shrink-0 ml-1">
                             Seed 1
                         </div>
                     </div>
@@ -145,46 +147,51 @@ Confirmation: NO custom SVG tags used (Lucide library used for standard icons); 
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center flavor-vote-card" data-flavor="Cherry">
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center flavor-vote-card" data-flavor="Cherry" data-emoji="🍒">
                 <div class="text-4xl mb-3">🍒</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Cherry</h3>
-                <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
+                <div class="w-full bg-slate-100 h-2 rounded-full mb-4 overflow-hidden">
+                    <!-- UPDATE PERCENTAGE HERE (Change w-[XX%] only) -->
                     <div class="vote-progress bg-red-500 h-full rounded-full w-[85%]"></div>
                 </div>
                 <span class="rank-label text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #1</span>
             </div>
 
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center flavor-vote-card" data-flavor="Classic Apple">
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center flavor-vote-card" data-flavor="Classic Apple" data-emoji="🍎">
                 <div class="text-4xl mb-3">🍎</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Apple</h3>
-                <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
+                <div class="w-full bg-slate-100 h-2 rounded-full mb-4 overflow-hidden">
+                    <!-- UPDATE PERCENTAGE HERE (Change w-[XX%] only) -->
                     <div class="vote-progress bg-green-500 h-full rounded-full w-[78%]"></div>
                 </div>
                 <span class="rank-label text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #2</span>
             </div>
 
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center flavor-vote-card" data-flavor="Peach">
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center flavor-vote-card" data-flavor="Peach" data-emoji="🍑">
                 <div class="text-4xl mb-3">🍑</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Peach</h3>
-                <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
+                <div class="w-full bg-slate-100 h-2 rounded-full mb-4 overflow-hidden">
+                    <!-- UPDATE PERCENTAGE HERE (Change w-[XX%] only) -->
                     <div class="vote-progress bg-orange-400 h-full rounded-full w-[62%]"></div>
                 </div>
                 <span class="rank-label text-xs font-bold text-slate-400 uppercase tracking-widest">Currently #3</span>
             </div>
 
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70 flavor-vote-card" data-flavor="Strawberry">
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70 flavor-vote-card" data-flavor="Strawberry" data-emoji="🍓">
                 <div class="text-4xl mb-3">🍓</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Strawberry</h3>
-                <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
+                <div class="w-full bg-slate-100 h-2 rounded-full mb-4 overflow-hidden">
+                    <!-- UPDATE PERCENTAGE HERE (Change w-[XX%] only) -->
                     <div class="vote-progress bg-pink-400 h-full rounded-full w-[35%]"></div>
                 </div>
                 <span class="rank-label text-xs font-bold text-pink-500 uppercase tracking-widest italic">On the Edge</span>
             </div>
 
-            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70 flavor-vote-card" data-flavor="Banana Cream">
+            <div class="pie-card bg-white border border-slate-100 p-6 rounded-3xl shadow-sm text-center border-dashed border-2 opacity-70 flavor-vote-card" data-flavor="Banana Cream" data-emoji="🍌">
                 <div class="text-4xl mb-3">🍌</div>
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Banana</h3>
-                <div class="w-full bg-slate-100 h-2 rounded-full mb-4">
+                <div class="w-full bg-slate-100 h-2 rounded-full mb-4 overflow-hidden">
+                    <!-- UPDATE PERCENTAGE HERE (Change w-[XX%] only) -->
                     <div class="vote-progress bg-yellow-400 h-full rounded-full w-[22%]"></div>
                 </div>
                 <span class="rank-label text-xs font-bold text-yellow-600 uppercase tracking-widest italic text-slate-700">Needs Love</span>
@@ -194,14 +201,14 @@ Confirmation: NO custom SVG tags used (Lucide library used for standard icons); 
 
     <!-- Combined Muttville Mission Area -->
     <div class="bg-slate-900 text-white">
-        <!-- Mission Section -->
-        <section id="mission" class="pt-24 pb-8 px-6 overflow-hidden relative">
+        <!-- Mission Section: Tightly controlled padding -->
+        <section id="mission" class="pt-24 pb-0 px-6 overflow-hidden relative">
             <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=800" alt="Senior Dog" class="rounded-3xl shadow-2xl relative z-10 grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=800" alt="Senior Dog" class="rounded-3xl shadow-2xl relative z-10 grayscale hover:grayscale-0 transition-all duration-700 border border-white/10">
                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border-2 border-white/10 rounded-full animate-pulse"></div>
                 </div>
-                <div>
+                <div class="pb-12 md:pb-0">
                     <h2 class="heading-font text-4xl mb-6 text-white leading-tight">Baking for the <br><span class="text-blue-400">Old Souls</span></h2>
                     <p class="text-lg text-slate-300 mb-8 leading-relaxed">
                         Muttville Senior Dog Rescue is a San Francisco-based nonprofit that gives senior dogs a second chance. These "wise" dogs often get overlooked in shelters, but they have so much love to give.
@@ -215,11 +222,11 @@ Confirmation: NO custom SVG tags used (Lucide library used for standard icons); 
             </div>
         </section>
 
-        <!-- Muttville Gallery Section -->
-        <section id="pups" class="pt-4 pb-24 px-6">
+        <!-- Muttville Gallery Section: Gap Removed -->
+        <section id="pups" class="pt-12 pb-24 px-6">
             <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-16 border-t border-white/5 pt-12">
-                    <h2 class="heading-font text-4xl mb-4 text-white">The Seniors You're Helping</h2>
+                <div class="text-center mb-12 border-t border-white/10 pt-12">
+                    <h2 class="heading-font text-3xl mb-3 text-white">The Seniors You're Helping</h2>
                     <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">Every slice supports these real dogs currently looking for homes. Click below to view their full profiles.</p>
                 </div>
                 
@@ -279,7 +286,7 @@ Confirmation: NO custom SVG tags used (Lucide library used for standard icons); 
     <footer class="bg-white py-12 px-6 border-t border-slate-200">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
             <div class="flex flex-col items-center gap-1">
-                <div class="h-14 w-14 bg-orange-500 rounded-xl flex items-center justify-center overflow-hidden shadow-sm">
+                <div class="h-14 w-14 bg-orange-500 rounded-xl flex items-center justify-center overflow-hidden shadow-sm border border-orange-100">
                     <img src="https://lh3.googleusercontent.com/d/1t_GXUwnG0o1h1j6w7eEATJCfCvkDntWX" alt="Coo-Pie Logo" class="h-full w-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <i data-lucide="pie-chart" class="hidden text-white w-7 h-7"></i>
                 </div>
@@ -317,20 +324,26 @@ Confirmation: NO custom SVG tags used (Lucide library used for standard icons); 
             const flavorCards = document.querySelectorAll('.flavor-vote-card');
             let maxPercent = -1;
             let leaderName = "Classic Apple";
+            let leaderEmoji = "🍎";
 
             flavorCards.forEach(card => {
                 const bar = card.querySelector('.vote-progress');
-                const match = bar.className.match(/w-\[(\d+)%\]/);
+                const classString = bar.className;
+                const match = classString.match(/w-\[(\d+)%\]/);
+                
                 if (match) {
                     const percent = parseInt(match[1]);
                     if (percent > maxPercent) {
                         maxPercent = percent;
                         leaderName = card.getAttribute('data-flavor');
+                        leaderEmoji = card.getAttribute('data-emoji') || "🥧";
                     }
                 }
             });
 
-            document.getElementById('top-seed-name').innerText = leaderName;
+            // Update the Top Seed card in the Hero Section
+            const nameEl = document.getElementById('top-seed-name');
+            nameEl.innerText = `${leaderEmoji} ${leaderName}`;
         }
 
         window.onload = updateTopSeed;
